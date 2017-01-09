@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>
+<html lang="pl" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html lang="pl" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html lang="pl" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html lang="pl" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>My AngularJS App</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css">
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic">
+
+  <link rel="stylesheet" href="app.css">
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body ng-controller="myAppCtrl" class="myApp">
+
+  <md-content class="full-height" layout="column" layout-align="space-between">
+
+    <md-toolbar class="md-primary">
+      <div class="md-toolbar-tools">
+        <md-button ng-click="toggleLeft()" class="md-icon-button" aria-label="Settings" ng-disabled="false">
+          <md-icon md-svg-icon="img/icons/menu.svg" class="text-white"></md-icon>
+        </md-button>
+        <h2>
+          <span></span>
+        </h2>
+        <span flex></span>
+        <md-button class="md-icon-button" aria-label="Favorite">
+          <md-icon md-svg-icon="" style="color: greenyellow;"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="More">
+          <md-icon md-svg-icon=""></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <section layout layout-align="center start" flex>
+
+      <md-sidenav
+              class="md-sidenav-left"
+              md-component-id="left"
+              md-whiteframe="4"
+              md-disable-backdrop
+              md-is-open="true"
+              ng-cloak>
+        <md-content layout="column" layout-align="space-around stretch">
+          <md-list ng-cloak>
+
+            <md-subheader class="md-no-sticky">Views</md-subheader>
+            <md-list-item class="active" ng-click="location('/view1')">
+              <p>Outcomes</p>
+            </md-list-item>
+            <md-list-item ng-click="location('/view2')">
+              <p>Incomes</p>
+            </md-list-item>
+            <md-list-item ng-click="location('/view3')">
+              <p>Summary</p>
+            </md-list-item>
+
+            <md-subheader class="md-no-sticky">Filters</md-subheader>
+            <md-list-item>
+                <p>Hide completed</p>
+                <md-checkbox class="md-secondary" ng-model="completed" ></md-checkbox>
+            </md-list-item>
+
+            <md-list-item>
+              <p>By Name</p>
+              <md-checkbox class="md-secondary" ng-model="nameFilter.show" ></md-checkbox>
+            </md-list-item>
+            <md-list-item ng-if="nameFilter.show">
+              <md-input-container>
+                <label>Name</label>
+                <input ng-model="$parent.filterName">
+              </md-input-container>
+            </md-list-item>
+
+            <md-list-item>
+              <p>By Month</p>
+              <md-checkbox class="md-secondary" ng-model="monthFilter.show" > </md-checkbox>
+            </md-list-item>
+            <md-list-item ng-if="monthFilter.show">
+              <md-input-container>
+                <label>Month</label>
+                <md-select ng-model="$parent.selectedMonth">
+                  <md-option value=""></md-option>
+                  <md-option ng-repeat="month in months" value="{{$index}}">{{ month }}</md-option>
+                </md-select>
+              </md-input-container>
+            </md-list-item>
+          </md-list>
+        </md-content>
+      </md-sidenav>
+
+      <div layout="column" class="full-height" md-whiteframe="2" flex ng-cloak>
+
+        <div layout="column" class="myApp-tables" ng-view flex></div>
+
+      </div>
+    </section>
+
+    <md-button class="md-fab md-fab-bottom-right" aria-label="Eat cake" ng-click="saveState()">
+    </md-button>
+
+    <md-button class="md-fab md-primary md-fab-top-right" aria-label="Eat cake" ng-click="print()">
+    </md-button>
+
+  </md-content>
+
+
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+  -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+  <script src="bower_components/angular-material/angular-material.js"></script>
+  <script src="bower_components/angular-aria/angular-aria.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+
+  <script src="app.js"></script>
+  <script src="view1/view1.js"></script>
+  <script src="view2/view2.js"></script>
+  <script src="view3/view3.js"></script>
+</body>
+</html>
